@@ -1,153 +1,158 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react'
 
-function App() {
+const App = () => {
 
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-
-  // console.log(firstName);
-  // console.log(lastName);
-  // function changeFirstNameHandler(event) {
-  //   // console.log("printing first name")
-  //   // console.log(event.target.value);
-  //   setFirstName(event.target.value);
-  // }
-  // function changelastNameHandler(event) {
-  //   // console.log("Printing last name")
-  //   // console.log(event.target.value);
-  //   setLastName(event.target.value);
+  // function firstchangehandler(event){
+  //   console.log("printing first");
+  //   console.log(event.target.value);
   // }
 
-  const [formData, setFormData] = useState(  {firstName: "", 
-  lastName: "", email:"", comments:"", isVisible:true, mode:"", favCar:"" } );
+  // function lastchangehandler(event){
+  //   console.log("printing last");
+  //   console.log(event.target.value);
+  // }
 
-  // console.log(formData)
+  const[formdata, setformdata] = useState({
+    firstname:"", lastname: "", Comments : "",  isvisible:  false,
+    mode: "", favcar: " ", name:""
 
-  function changeHandler(event) {
-    const {name, value, checked, type} = event.target
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [name]: type ==="checkbox" ? checked : value
+  });
+
+
+  function changehandler(event){
+    const{name, value, checked, type} = event.target 
+    setformdata(prevData =>{
+      return{
+        ...prevData,
+        [name]: type === "checkbox"? checked: value
       }
-    });
+    })
   }
-
-  function submitHandler(event) {
+  function submithandler(event){
     event.preventDefault();
-    //print
-    console.log("Finally printing the entireform ka data ........")
-    console.log(formData)
+    console.log("priti all data");
+    console.log(formdata);
+
   }
-
   return (
-    <div className="App">
-      <form onSubmit={submitHandler}>
-      <br/>
-        <input
-          type="text"
-          placeholder='first name'
-          onChange={changeHandler}  
-          name="firstName"
-          value={formData.firstName}
-        />
+    <div>
 
-        <br/>
-        <br></br>
+<form onSubmit={submithandler}>
+  
+<input
+type='text'
+placeholder='first name'
+onChange={changehandler}
+name = "firstname"
+value={formdata.firstname}
 
-        <input
-          type="text"
-          placeholder='last name'
-          onChange={changeHandler} 
-          name="lastName" 
-          value={formData.lastName}
-        />
+/>
+<br></br>
+<br></br>
 
-        <br/>
-        <br/>
-        <input
-          type="email"
-          placeholder="Enter your email here"
-          onChange={changeHandler}
-          name="email"
-          value={formData.email}  
-          />
+<input
+type='text'
+placeholder='last name'
+onChange={changehandler}
+name = "lastname"
+value={formdata.lastname}
 
-<br/><br/>
-        <textarea
-          placeholder='enter your comments here'
-          onChange={changeHandler}
-          name="comments"
-          value={formData.comments}
-         /> 
-         <br/>
-         <br/>
+/>
 
-         <input
-          type="checkbox"
-          onChange={changeHandler}
-          name="isVisible"
-          id="isVisible"
-          checked={formData.isVisible}
-          />
-          <label htmlFor='isVisible'>Am I visible ?</label>
+<br></br>
+<input
 
-          <br/>
-          <br/>
+type='email'
+placeholder='enter your email'
+onChange={changehandler}
+name= 'email'
+value={formdata.email}
 
-          <fieldset>
-            <legend>Mode:</legend>
-            <input
-            type="radio"
-            onChange={changeHandler}
-            name="mode"
-            value="Online-Mode"
-            id="Online-Mode"
-            checked={formData.mode === "Online-Mode"}
-          />
-          <label htmlFor='Online-mode'>Online Mode</label>
+/>
+<br></br>
+<textarea
+placeholder=' enter your text'
+onChange={changehandler}
+name='comments'
+value={formdata.Comments}
+/>
 
-          <input
-            type="radio"
-            onChange={changeHandler}
-            name="mode"
-            value="Offline-Mode"
-            id="Offline-Mode"
-            checked={formData.mode === "Offline-Mode"}
-          />
-          <label htmlFor='Offline-mode'>Offline Mode</label>
+<br></br>
+<br></br>
+<input 
+type='checkbox'
+onChange={changehandler}
+name='isvisible'
+id='isvisible'
+checked = {formdata.isvisible}
+/>
 
-          </fieldset>
-          <label htmlFor='favCar'> Tell me your Favourite Car </label>
-          <select
-            name="favCar"
-            id="favCar"
-            value={formData.favCar}
-            onChange={changeHandler}
-          >
-          <option value="scarpio">Scarpio</option>
-          <option value="fartuner">fartuner</option>
-          <option value="Tharrr">Tharrr</option>
-          <option value="Legender">Legender</option>
-          <option value="Defender">Defender</option>
 
-          </select>
+<label htmlFor='isvisible'>am i visible</label>
 
-         {/* <input type='submit' value='submit'/> */}
-         <br/>
-         <br/>
-         <button>Submit</button>
+<br></br>
+<br></br>
+
+<fieldset>
+  <legend>mode:</legend>
+
+<input
+type='radio'
+onChange={changehandler}
+name='mode'
+value= "online-mode"
+id='online-mode'
+checked = {formdata.mode === "online-mode"}
+
+/>
+
+<label htmlFor='online-mode'>online-mode</label>
 
 
 
 
+<input
+type='radio'
+onChange={changehandler}
+name='mode'
+value= "offline-mode"
+id='offline-mode'
+checked = {formdata.mode === "offline-mode"}
+
+/>
+
+<label htmlFor='offline-mode'>onffine-mode</label>
+
+</fieldset>
+<label htmlFor='favcar'>tell me your name favcar</label>
+<select
+ name = "favcar"
+ id='favcar'
+ value={formdata.favcar}
+ onChange={changehandler}
+
+>
+  <option value= "fortuer">fortuer</option>
+  <option value= "fortuer">fortuer</option>
+  <option value= "fortuer">fortuer</option>
+  <option value= "fortuer">fortuer</option>
+  <option value= "fortuer">fortuer</option>
+
+</select>
+
+<br/>
+<br/>
+
+{/* <input type='submit' value= "submit"/> */}
+
+<button>submit</button>
+
+</form>
 
 
-      </form>
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
